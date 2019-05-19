@@ -1,0 +1,31 @@
+{
+	"name": "bco-be",
+	"version": "1.0.0",
+	"description": "business-card-organizer-backend",
+	"main": "index.js",
+	"scripts": {
+		"server": "nodemon index.js",
+		"test": "cross-env DB_ENV=testing jest --watch --verbose",
+		"start": "node index.js"
+	},
+	"repository": "https://github.com/business-card-organizer/BCO-Backend-MarinaBaskova.git",
+	"author": "MB",
+	"license": "MIT",
+	"dependencies": {
+		"bcryptjs": "^2.4.3",
+		"cors": "^2.8.5",
+		"dotenv": "^8.0.0",
+		"express": "^4.17.0",
+		"helmet": "^3.18.0",
+		"jsonwebtoken": "^8.5.1",
+		"knex": "^0.17.0-next3",
+		"pg": "^7.11.0",
+		"sqlite3": "^4.0.8"
+	},
+	"devDependencies": {
+		"cross-env": "^5.2.0",
+		"jest": "^24.8.0",
+		"nodemon": "^1.19.0",
+		"supertest": "^4.0.2"
+	}
+}
