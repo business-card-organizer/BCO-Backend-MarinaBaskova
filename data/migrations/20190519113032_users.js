@@ -8,15 +8,14 @@ exports.up = function(knex, Promise) {
 			table.string('password', 100).notNullable();
 			table.string('organization', 100);
 			table.string('job_title', 100);
-			table.string('email', 128).unique();
-			table.string('phone', 30).unique();
-			table.string('unique_code', 10).unique();
+			table.string('email', 128);
+			table.string('phone', 30);
+			table.string('unique_code', 10).notNullable().unique();
 		})
 		.createTable('events', (table) => {
 			table.increments();
-			table.string('event_name', 100).notNullable().unique();
-			table.string('city', 50).notNullable().unique();
-			table.string('date', 50).notNullable();
+			table.string('event_name', 100).notNullable();
+			table.string('city', 50).notNullable();
 			table
 				.integer('user_id')
 				.unsigned()
@@ -32,8 +31,8 @@ exports.up = function(knex, Promise) {
 			table.string('last_name').notNullable();
 			table.string('organization', 100);
 			table.string('job_title', 100);
-			table.string('email', 128).unique();
-			table.string('phone', 30).unique();
+			table.string('email', 128);
+			table.string('phone', 30);
 			table
 				.integer('user_id')
 				.unsigned()
