@@ -27,6 +27,20 @@ exports.seed = function(knex, Promise) {
 				email: 'amys@abcnet.com',
 				phone: '123-456-789',
 				unique_code: Math.random().toString(36).substring(7)
+			},
+			{
+				username: 'User1',
+				first_name: 'First',
+				last_name: 'Smith',
+				password: bcrypt.hashSync('hello', 10),
+				unique_code: Math.random().toString(36).substring(7)
+			},
+			{
+				username: 'User2',
+				first_name: 'Second',
+				last_name: 'Smith',
+				password: bcrypt.hashSync('hello', 10),
+				unique_code: Math.random().toString(36).substring(7)
 			}
 		]);
 	});
