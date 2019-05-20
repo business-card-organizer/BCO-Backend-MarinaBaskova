@@ -1,5 +1,5 @@
 exports.seed = function(knex, Promise) {
-	return knex('cards').truncate().then(function() {
+	return knex('cards').del().then(function() {
 		return knex('cards').insert([
 			{
 				first_name: 'Fred',
