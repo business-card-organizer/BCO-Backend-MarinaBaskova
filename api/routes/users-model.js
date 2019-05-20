@@ -19,7 +19,7 @@ async function findById(id) {
 			jobTitle: 'job_title',
 			email: 'email',
 			phone: 'phone',
-			uniqueCode: 'unique_code'
+			qrCode: 'qr_code'
 		})
 		.where({ id })
 		.first();

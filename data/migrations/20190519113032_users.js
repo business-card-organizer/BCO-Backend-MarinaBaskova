@@ -10,7 +10,7 @@ exports.up = function(knex, Promise) {
 			table.string('job_title', 100);
 			table.string('email', 128);
 			table.string('phone', 30);
-			table.string('unique_code', 10).notNullable().unique();
+			table.string('qr_code', 10).notNullable().unique();
 		})
 		.createTable('events', (table) => {
 			table.increments();
@@ -44,10 +44,9 @@ exports.up = function(knex, Promise) {
 			table
 				.integer('event_id')
 				.unsigned()
-				.notNullable()
 				.references('id')
 				.inTable('events')
-				.onDelete('CASCADE')
+				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 		});
 };

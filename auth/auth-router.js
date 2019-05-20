@@ -24,14 +24,14 @@ router.post('/register', async (req, res) => {
 				password: newUser.password,
 				first_name: newUser.firstName,
 				last_name: newUser.lastName,
-				unique_code: Math.random().toString(36).substring(7)
+				qr_code: Math.random().toString(36).substring(7)
 			});
 			if (addedUser) {
 				const token = generateToken(addedUser);
 				res.status(201).json({
 					message: `Welcome ${addedUser.username}!`,
 					token,
-					uniqueCode: addedUser.uniqueCode
+					qrCode: addedUser.qrCode
 				});
 			}
 		} catch (error) {
@@ -52,7 +52,7 @@ router.post('/login', async (req, res) => {
 				res.status(201).json({
 					message: `Welcome ${user.username}!`,
 					token,
-					uniqueCode: user.unique_code
+					qrCode: user.qr_code
 				});
 			} else {
 				res.status(401).json({ message: 'Username or password is incorrect.' });
