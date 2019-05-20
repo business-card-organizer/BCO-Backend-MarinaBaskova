@@ -1,7 +1,6 @@
 const db = require('../../config/dbConfig');
 
 module.exports = {
-	// find,
 	findById,
 	findByUser,
 	create,
@@ -16,7 +15,6 @@ async function findById(id) {
 			username: 'username',
 			firstName: 'first_name',
 			lastName: 'last_name',
-			password: 'password',
 			organization: 'organization',
 			jobTitle: 'job_title',
 			email: 'email',

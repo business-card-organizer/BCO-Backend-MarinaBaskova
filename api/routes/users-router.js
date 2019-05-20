@@ -2,12 +2,13 @@ const router = require('express').Router();
 const db = require('./users-model');
 const bcrypt = require('bcryptjs');
 
-// >>>>> /api/users
+// >>>>> /api/user/
 
-router.get('/:id', async (req, res) => {
-	const { id } = req.params;
+router.get('/', async (req, res) => {
+	const userID = req.decodedToken.subject.toString();
+
 	try {
-		const user = await db.findById(id);
+		const user = await db.findById(userID);
 		if (user) {
 			res.status(200).json(user);
 		} else {
@@ -19,20 +20,37 @@ router.get('/:id', async (req, res) => {
 });
 
 // update user
-router.put('/:id', async (req, res) => {
+router.put('/', async (req, res) => {
+	const userID = req.decodedToken.subject.toString();
 	const { username, password, firstName, lastName, organization, jobTitle, email, phone } = req.body;
-	const user = {
-		username,
-		password: bcrypt.hashSync(password, 10),
-		first_name: firstName,
-		last_name: lastName,
-		organization,
-		job_title: jobTitle,
-		email,
-		phone
-	};
+
+	const user = {};
+	if (username) {
+		user.username = username;
+	}
+	if (password) {
+		user.password = bcrypt.hashSync(password, 10);
+	}
+	if (firstName) {
+		user.first_name = firstName;
+	}
+	if (lastName) {
+		user.last_name = lastName;
+	}
+	if (organization) {
+		user.organization = organization;
+	}
+	if (jobTitle) {
+		user.job_title = jobTitle;
+	}
+	if (email) {
+		user.email = email;
+	}
+	if (phone) {
+		user.phone = phone;
+	}
 	try {
-		const userToUpdate = await db.update(user, req.params.id);
+		const userToUpdate = await db.update(user, userID);
 		if (userToUpdate) {
 			res.status(200).json(userToUpdate);
 		} else {
@@ -48,9 +66,11 @@ router.put('/:id', async (req, res) => {
 });
 
 //delete
-router.delete('/:id', async (req, res) => {
+router.delete('/', async (req, res) => {
+	const userID = req.decodedToken.subject.toString();
+
 	try {
-		const deletedUser = await db.remove(req.params.id);
+		const deletedUser = await db.remove(userID);
 		if (deletedUser) {
 			// res.status(204).end();
 			res.status(200).json(deletedUser);

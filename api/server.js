@@ -16,7 +16,7 @@ server.get('/', (req, res) => {
 	res.status(200).json({ message: 'Hello World' });
 });
 
-server.use('/api/users', restricted, userRouter);
+server.use('/api/user', restricted, userRouter);
 server.use('/api/auth', authRouter);
 
 module.exports = server;
