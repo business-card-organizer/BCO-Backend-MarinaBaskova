@@ -3,7 +3,8 @@ const db = require('../../config/dbConfig');
 module.exports = {
 	// find,
 	findById,
-	// create,
+	findByUser,
+	create,
 	remove,
 	update
 };
@@ -19,11 +20,25 @@ async function findById(id) {
 			organization: 'organization',
 			jobTitle: 'job_title',
 			email: 'email',
-			phone: 'phone'
+			phone: 'phone',
+			uniqueCode: 'unique_code'
 		})
 		.where({ id })
 		.first();
 	return user;
+}
+
+async function findByUser(username) {
+	const user = await db('users').where({ username }).first();
+	return user;
+}
+
+async function create(newUser) {
+	const [ id ] = await db('users').insert(newUser, 'id');
+	if (id) {
+		const user = await findById(id);
+		return user;
+	}
 }
 
 async function update(infoToUpdate, id) {
