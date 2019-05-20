@@ -84,4 +84,4 @@ typings/
 .dynamodb/
 
 # DB 
-bco.db3
+data/bco.db3
