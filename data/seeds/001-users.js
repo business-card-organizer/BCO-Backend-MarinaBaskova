@@ -8,39 +8,43 @@ exports.seed = function(knex, Promise) {
 				first_name: 'David',
 				last_name: 'Smith',
 				password: bcrypt.hashSync('hello', 10),
-				unique_code: Math.random().toString(36).substring(7)
+				qr_code: Math.random().toString(36).substring(7)
 			},
 			{
 				username: 'JohnS',
 				first_name: 'John',
 				last_name: 'Smith',
 				password: bcrypt.hashSync('hello', 10),
-				unique_code: Math.random().toString(36).substring(7)
+				qr_code: Math.random().toString(36).substring(7)
 			},
 			{
-				username: 'AmyS',
+				username: 'AmyJ',
 				first_name: 'Amy',
-				last_name: 'Smith',
+				last_name: 'Jade',
 				password: bcrypt.hashSync('hello', 10),
 				organization: 'ABC Network',
 				job_title: 'Web Dev',
 				email: 'amys@abcnet.com',
 				phone: '123-456-789',
-				unique_code: Math.random().toString(36).substring(7)
+				qr_code: Math.random().toString(36).substring(7)
 			},
 			{
-				username: 'User1',
-				first_name: 'First',
-				last_name: 'Smith',
+				username: 'TomC',
+				first_name: 'Tom',
+				last_name: 'Charles',
 				password: bcrypt.hashSync('hello', 10),
-				unique_code: Math.random().toString(36).substring(7)
+				organization: 'Lambda School',
+				job_title: 'Student',
+				qr_code: Math.random().toString(36).substring(7)
 			},
 			{
-				username: 'User2',
-				first_name: 'Second',
-				last_name: 'Smith',
+				username: 'JenH',
+				first_name: 'Jen',
+				last_name: 'Hill',
 				password: bcrypt.hashSync('hello', 10),
-				unique_code: Math.random().toString(36).substring(7)
+				organization: 'NFL',
+				job_title: 'Frontend Developer',
+				qr_code: Math.random().toString(36).substring(7)
 			}
 		]);
 	});

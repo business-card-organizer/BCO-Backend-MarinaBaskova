@@ -42,7 +42,7 @@ This project is a RESTful API built using Node and Express. This project was bui
 
 **DEL** `https://business-cards-organizer.herokuapp.com/api/user` will delete the user, and return the deleted object.
 
-**PUT** `https://business-cards-organizer.herokuapp.com/api/user` will edit the user, and return the edited object. Edit fields can be just one or multiple(for example user can change password, or can change job title, password and email in one request);
+**PUT** `https://business-cards-organizer.herokuapp.com/api/user` will edit the user, and return the edited object. Edit fields can be just one or multiple(for example user can change password, or can change job title,password and email in one request);
 
 ### Cards
 
