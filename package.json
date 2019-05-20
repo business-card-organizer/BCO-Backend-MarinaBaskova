@@ -6,7 +6,8 @@
 	"scripts": {
 		"server": "nodemon index.js",
 		"test": "cross-env DB_ENV=testing jest --watch --verbose",
-		"start": "node index.js"
+		"start": "node index.js",
+		"reset": "npx knex migrate:rollback && npx migrate:latest && npx knex seed:run"
 	},
 	"repository": "https://github.com/business-card-organizer/BCO-Backend-MarinaBaskova.git",
 	"author": "MB",
