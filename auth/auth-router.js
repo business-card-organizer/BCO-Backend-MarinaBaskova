@@ -14,7 +14,9 @@ router.post('/register', async (req, res) => {
 		!newUser.hasOwnProperty('firstName') ||
 		!newUser.hasOwnProperty('lastName')
 	) {
-		res.status(401).json({ error: 'Please provide name and password and department for the user' });
+		res
+			.status(401)
+			.json({ error: 'Please provide username and password and firstName, and lastName for the user' });
 	} else {
 		const hash = bcrypt.hashSync(newUser.password, 8);
 		newUser.password = hash;
