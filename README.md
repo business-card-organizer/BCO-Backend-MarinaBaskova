@@ -42,11 +42,24 @@ This project is a RESTful API built using Node and Express. This project was bui
 
 **DEL** `https://business-cards-organizer-ls.herokuapp.com/api/user` will delete the user, and return the deleted object.
 
-**PUT** `https://business-cards-organizer.herokuapp.com/api/user` will edit the user, and return the edited object. Edit fields can be just one or multiple(for example user can change password, or can change job title,password and email in one request);
+**PUT** `https://business-cards-organizer-ls.herokuapp.com/api/user` will edit the user, and return the edited object. Edit fields can be just one or multiple(for example user can change password, or can change job title,password and email in one request);
 
 ### Cards
+- valid **JSON web token** is required in your request headers.authorization for every Cards endpoint
 
+### Events
 
+- valid **JSON web token** is required in your request headers.authorization for every Events endpoint
+
+**GET** `https://business-cards-organizer-ls.herokuapp.com/api/events` will return an array of events objects that user has.
+
+**GET** `https://business-cards-organizer-ls.herokuapp.com/api/events/:id` will return an object corresponding to the event at that ID.
+
+**DEL** `https://business-cards-organizer-ls.herokuapp.com/api/events` will delete the event, and return status 204.
+
+**POST** `https://business-cards-organizer-ls.herokuapp.com/api/events` will post a event, and return the created object. The eventName, city, are REQUIRED fields.
+
+**PUT** `https://business-cards-organizer-ls.herokuapp.com/api/events/:id` will edit the event,and return the edited object. Edit fields can be just one or multiple(for example user can change city for the Event, or can change eventName and eventName for Event in one request);
 
 
 # Technical Design Document
