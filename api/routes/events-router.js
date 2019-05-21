@@ -8,11 +8,11 @@ router.get('/', async (req, res) => {
 	const userID = req.decodedToken.subject.toString();
 
 	try {
-		const user = await db.findAll(userID);
-		if (user) {
-			res.status(200).json(user);
+		const events = await db.findAll(userID);
+		if (events) {
+			res.status(200).json(events);
 		} else {
-			res.status(404).json({ message: 'Event with specified ID does not exist.' });
+			res.status(404).json({ message: 'Event with specified ID does not exist.' }); //<<< user does not have any events
 		}
 	} catch (error) {
 		res.status(500).json({ message: `Event request failed ${error.message}.` });

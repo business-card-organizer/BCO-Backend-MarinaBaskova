@@ -19,7 +19,7 @@ exports.seed = function(knex, Promise) {
 				email: 'Linda@greatwebdev.com',
 				phone: '124-245-789',
 				user_id: 2,
-				event_id: 2
+				event_id: 3
 			},
 			{
 				first_name: 'Sophia',
@@ -29,7 +29,7 @@ exports.seed = function(knex, Promise) {
 				email: 'Sophia@greatwebdev.com',
 				phone: '111-456-789',
 				user_id: 2,
-				event_id: 1
+				event_id: 2
 			},
 			{
 				first_name: 'Jeremy',
@@ -39,7 +39,7 @@ exports.seed = function(knex, Promise) {
 				email: 'Jeremy@greattech.com',
 				phone: '924-456-789',
 				user_id: 1,
-				event_id: 3
+				event_id: 1
 			},
 			{
 				first_name: 'Ashley',
@@ -49,7 +49,7 @@ exports.seed = function(knex, Promise) {
 				email: 'Linda@greatwebdev.com',
 				phone: '184-456-789',
 				user_id: 3,
-				event_id: 3
+				event_id: 5
 			}
 		]);
 	});
