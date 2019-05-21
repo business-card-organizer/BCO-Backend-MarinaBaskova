@@ -30,17 +30,17 @@ This project is a RESTful API built using Node and Express. This project was bui
 
 ### Log In and Registration
 
-**POST** `https://business-cards-organizer.herokuapp.com/api/auth/register` will create a new user and send back a token. Username, password, firstName, lastName are required fields.
+**POST** `https://business-cards-organizer-ls.herokuapp.com/api/auth/register` will create a new user and send back a token. Username, password, firstName, lastName are required fields.
 
-**POST** `https://business-cards-organizer.herokuapp.com/api/auth/login` will log the user in, and send back a token. Username and password required.
+**POST** `https://business-cards-organizer-ls.herokuapp.com/api/auth/login` will log the user in, and send back a token. Username and password required.
 
 ### User
 
 - valid **JSON web token** is required in your request headers.authorization for every User endpoint
 
-**GET** `https://business-cards-organizer.herokuapp.com/api/user` will return user object.
+**GET** `https://business-cards-organizer-ls.herokuapp.com/api/user` will return user object.
 
-**DEL** `https://business-cards-organizer.herokuapp.com/api/user` will delete the user, and return the deleted object.
+**DEL** `https://business-cards-organizer-ls.herokuapp.com/api/user` will delete the user, and return the deleted object.
 
 **PUT** `https://business-cards-organizer.herokuapp.com/api/user` will edit the user, and return the edited object. Edit fields can be just one or multiple(for example user can change password, or can change job title,password and email in one request);
 
