@@ -5,6 +5,7 @@ const cors = require('cors');
 const userRouter = require('./routes/users-router.js');
 const authRouter = require('../auth/auth-router.js');
 const eventsRouter = require('./routes/events-router.js');
+// const cardsRouter = require('./routes/cards-router.js');
 
 const restricted = require('../auth/restricted-mw.js');
 
@@ -19,6 +20,7 @@ server.get('/', (req, res) => {
 
 server.use('/api/user', restricted, userRouter);
 server.use('/api/events', restricted, eventsRouter);
+// server.use('/api/cards', restricted, cardsRouter);
 server.use('/api/auth', authRouter);
 
 module.exports = server;
