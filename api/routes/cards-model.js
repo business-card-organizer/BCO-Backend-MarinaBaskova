@@ -46,7 +46,7 @@ async function findById(id, userID) {
 		})
 		.leftOuterJoin('events', 'events.id', 'cards.event_id')
 		.where({ 'cards.id': id })
-		.andWhere({ user_id: userID })
+		.andWhere({ 'cards.user_id': userID })
 		.orderBy('cards.user_id')
 		.first();
 	return card;
