@@ -73,6 +73,73 @@ router.post('/', async (req, res) => {
 	}
 });
 
+router.put('/:id', async (req, res) => {
+	const userID = req.decodedToken.subject.toString();
+	const { id } = req.params;
+	const { firstName, lastName, organization, jobTitle, email, phone, eventId } = req.body;
+	try {
+		let userEvent;
+		if (eventId) {
+			userEvent = await eventDB.findById(eventId, userID);
+		} else {
+			userEvent = null;
+		}
+		try {
+			const card = await db.findById(id, userID);
+			if (card) {
+				const cardUpdate = { user_id: userID };
+				if (firstName) {
+					cardUpdate.first_name = firstName;
+				}
+				if (lastName) {
+					cardUpdate.last_name = lastName;
+				}
+				if (organization) {
+					cardUpdate.organization = organization;
+				}
+				if (jobTitle) {
+					cardUpdate.job_title = jobTitle;
+				}
+				if (email) {
+					cardUpdate.email = email;
+				}
+				if (phone) {
+					cardUpdate.phone = phone;
+				}
+				if (eventId) {
+					cardUpdate.event_id = userEvent.id;
+				}
+				try {
+					const editedCard = await db.update(cardUpdate, id);
+					if (editedCard) {
+						res.status(200).json(editedCard);
+					} else {
+						res.status(404).json({
+							message: 'The event with the specified ID does not exist.'
+						});
+					}
+				} catch (error) {
+					res.status(500).json({
+						message: `The events's information could not be modified: ${error.message}.`
+					});
+				}
+			} else {
+				res.status(401).json({
+					message: `The card with the specified ID does not exist.`
+				});
+			}
+		} catch (error) {
+			res.status(500).json({
+				message: `Card updated failed ${error.message}.`
+			});
+		}
+	} catch (error) {
+		res.status(500).json({
+			message: `Card updated failed ${error.message}.`
+		});
+	}
+});
+
 router.delete('/:id', async (req, res) => {
 	const userID = req.decodedToken.subject.toString();
 	const { id } = req.params;

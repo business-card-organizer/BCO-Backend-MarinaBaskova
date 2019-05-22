@@ -4,8 +4,7 @@ module.exports = {
 	findAll,
 	findById,
 	create,
-	// create,
-	// update,
+	update,
 	remove
 };
 
@@ -59,6 +58,14 @@ async function create(newCard) {
 	if (id) {
 		const card = await findById(id, newCard.user_id);
 		return card;
+	}
+}
+
+async function update(card, id) {
+	const editedCard = await db('cards').where({ id }).update(card);
+	if (editedCard) {
+		const resultedCard = await findById(id, card.user_id);
+		return resultedCard;
 	}
 }
 
