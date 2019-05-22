@@ -25,7 +25,7 @@ async function findAll(user_id) {
 			userId: 'cards.user_id'
 		})
 		.leftOuterJoin('events', 'events.id', 'cards.event_id')
-		.where({ userId: user_id });
+		.where({ 'cards.user_id': user_id });
 	return userCards;
 }
 
