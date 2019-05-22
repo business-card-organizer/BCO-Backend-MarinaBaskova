@@ -107,7 +107,7 @@ router.put('/:id', async (req, res) => {
 					cardUpdate.phone = phone;
 				}
 				if (eventId) {
-					cardUpdate.event_id = userEvent.id;
+					cardUpdate.event_id = userEvent.id; ////<<<<
 				}
 				try {
 					const editedCard = await db.update(cardUpdate, id);
@@ -120,11 +120,11 @@ router.put('/:id', async (req, res) => {
 					}
 				} catch (error) {
 					res.status(500).json({
-						message: `The events's information could not be modified: ${error.message}.`
+						message: `The card's information could not be modified: ${error.message}.`
 					});
 				}
 			} else {
-				res.status(401).json({
+				res.status(404).json({
 					message: `The card with the specified ID does not exist.`
 				});
 			}
