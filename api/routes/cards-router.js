@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const db = require('./cards-model.js');
 const eventDB = require('./events-model.js');
+const userDB = require('./users-model.js');
 
 // >>>>> /api/cards/
 
@@ -44,44 +45,22 @@ router.post('/', async (req, res) => {
 		});
 	} else {
 		try {
-			let userEvent;
+			let newCardInfo = {
+				first_name: firstName,
+				last_name: lastName,
+				organization: organization,
+				job_title: jobTitle,
+				email: email,
+				phone: phone,
+				user_id: userID
+			};
 			if (eventId) {
-				userEvent = await eventDB.findById(eventId, userID);
-			} else {
-				userEvent = null;
+				let userEvent = await eventDB.findById(eventId, userID);
+				newCardInfo.event_id = userEvent.id;
 			}
-			try {
-				if (userEvent) {
-					const newCard = await db.create({
-						first_name: firstName,
-						last_name: lastName,
-						organization: organization,
-						job_title: jobTitle,
-						email: email,
-						phone: phone,
-						event_id: userEvent.id,
-						user_id: userID
-					});
-					if (newCard) {
-						res.status(201).json(newCard);
-					}
-				} else {
-					const newCard = await db.create({
-						first_name: firstName,
-						last_name: lastName,
-						organization: organization,
-						job_title: jobTitle,
-						email: email,
-						phone: phone,
-						user_id: userID
-					});
-					if (newCard) {
-						res.status(201).json(newCard);
-					}
-				}
-			} catch (error) {
-				res.status(500).json({ message: `Your card could not be posted ${error.message}.` });
-			}
+
+			let newCard = await db.create(newCardInfo);
+			res.status(201).json(newCard);
 		} catch (error) {
 			res.status(500).json({ message: `Your card could not be posted ${error.message}.` });
 		}
@@ -170,6 +149,31 @@ router.delete('/:id', async (req, res) => {
 		res.status(500).json({
 			message: `The card's information could not be modified: ${error.message}.`
 		});
+	}
+});
+
+router.post('/qr', async (req, res) => {
+	const userID = req.decodedToken.subject.toString();
+	const { qrCode } = req.body;
+	try {
+		let foundUser = await userDB.findByQR(qrCode);
+		console.log(foundUser);
+		if (foundUser) {
+			const newCardFromQR = await db.create({
+				first_name: foundUser.firstName,
+				last_name: foundUser.lastName,
+				organization: foundUser.organization,
+				job_title: foundUser.jobTitle,
+				email: foundUser.email,
+				phone: foundUser.phone,
+				user_id: userID
+			});
+			if (newCardFromQR) {
+				res.status(201).json(newCardFromQR);
+			}
+		}
+	} catch (error) {
+		res.status(500).json({ message: `Your card could not be posted ${error.message}.` });
 	}
 });
 
