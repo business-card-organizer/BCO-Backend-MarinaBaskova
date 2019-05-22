@@ -45,7 +45,17 @@ This project is a RESTful API built using Node and Express. This project was bui
 **PUT** `https://business-cards-organizer-ls.herokuapp.com/api/user` will edit the user, and return the edited object. Edit fields can be just one or multiple(for example user can change password, or can change job title,password and email in one request);
 
 ### Cards
+
 - valid **JSON web token** is required in your request headers.authorization for every Cards endpoint
+**GET** `https://business-cards-organizer-ls.herokuapp.com/api/cards` will return an array of cards objects that user has.
+
+**GET** `https://business-cards-organizer-ls.herokuapp.com/api/cards/:id` will return an object corresponding to the card at that ID.
+
+**DEL** `https://business-cards-organizer-ls.herokuapp.com/api/cards` will delete the card, and return status 204.
+
+**POST** `https://business-cards-organizer-ls.herokuapp.com/api/cards` will post a event, and return the created object. The firstName, lastName, organization, jobTitle, email, phone are REQUIRED fields. If event id for the new card is not provided, eventId, eventName and city will be null. To assign event to the card, made a get request to all user's events, after you get an array of events, it can be potentially displayed as a dropdown menu on the card form, so user can choose an event from the list and after send post request to save card with an event.
+
+**PUT** `https://business-cards-organizer-ls.herokuapp.com/api/cards/:id` will edit the card, and return the edited object. Edit fields can be just one or multiple(for example user can change firstname for the card, or can change firstname and lastname for card in one request); To change information for the event user will need to go to the event update route first; and then to update event on the card send get request for all user's events and after send put reqest to update card.
 
 ### Events
 
