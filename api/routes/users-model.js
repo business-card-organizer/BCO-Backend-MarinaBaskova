@@ -3,6 +3,7 @@ const db = require('../../config/dbConfig');
 module.exports = {
 	findById,
 	findByUser,
+	findByQR,
 	create,
 	remove,
 	update
@@ -22,6 +23,24 @@ async function findById(id) {
 			qrCode: 'qr_code'
 		})
 		.where({ id })
+		.first();
+	return user;
+}
+
+async function findByQR(qrCode) {
+	const user = await db('users')
+		.select({
+			id: 'id',
+			username: 'username',
+			firstName: 'first_name',
+			lastName: 'last_name',
+			organization: 'organization',
+			jobTitle: 'job_title',
+			email: 'email',
+			phone: 'phone',
+			qrCode: 'qr_code'
+		})
+		.where({ qr_code: qrCode })
 		.first();
 	return user;
 }
