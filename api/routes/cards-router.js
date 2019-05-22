@@ -3,7 +3,7 @@ const db = require('./cards-model.js');
 const eventDB = require('./events-model.js');
 const userDB = require('./users-model.js');
 
-// >>>>> /api/cards/
+// >>>> /api/cards/
 
 router.get('/', async (req, res) => {
 	const userID = req.decodedToken.subject.toString();
