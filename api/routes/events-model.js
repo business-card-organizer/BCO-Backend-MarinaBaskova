@@ -11,19 +11,19 @@ module.exports = {
 async function findAll(user_id) {
 	const userEvents = await db('events')
 		.select({ id: 'events.id', eventName: 'events.event_name', city: 'events.city' })
-		.where({ user_id });
+		.where({ 'events.user_id': user_id });
 	return userEvents;
 }
 
 async function findById(id, userID) {
 	const event = await db('events')
 		.select({
-			id: 'events.id', // do I need to show EventID in response ??
+			id: 'events.id',
 			eventName: 'events.event_name',
 			city: 'events.city'
 		})
 		.where({ 'events.id': id })
-		.andWhere({ user_id: userID })
+		.andWhere({ 'events.user_id': userID })
 		.first();
 	return event;
 }

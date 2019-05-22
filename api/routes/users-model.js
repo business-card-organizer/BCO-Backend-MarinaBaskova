@@ -40,7 +40,7 @@ async function findByQR(qrCode) {
 			phone: 'phone',
 			qrCode: 'qr_code'
 		})
-		.where({ qr_code: qrCode })
+		.where({ 'users.qr_code': qrCode })
 		.first();
 	return user;
 }
