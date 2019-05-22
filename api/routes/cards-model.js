@@ -3,10 +3,10 @@ const db = require('../../config/dbConfig');
 module.exports = {
 	findAll,
 	findById,
-	create
+	create,
 	// create,
 	// update,
-	// remove
+	remove
 };
 
 async function findAll(user_id) {
@@ -59,5 +59,13 @@ async function create(newCard) {
 	if (id) {
 		const card = await findById(id, newCard.user_id);
 		return card;
+	}
+}
+
+async function remove(id, userID) {
+	const cardToDelete = await findById(id, userID);
+	if (cardToDelete) {
+		const numOfDeleted = await db('cards').where({ id }).del();
+		return numOfDeleted;
 	}
 }

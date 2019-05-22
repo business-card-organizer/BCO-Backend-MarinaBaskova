@@ -73,4 +73,22 @@ router.post('/', async (req, res) => {
 	}
 });
 
+router.delete('/:id', async (req, res) => {
+	const userID = req.decodedToken.subject.toString();
+	const { id } = req.params;
+	try {
+		const deletedCard = await db.remove(id, userID);
+		if (deletedCard) {
+			res.status(204).end();
+			// res.status(200).json(deletedCard);
+		} else {
+			res.status(404).json({ message: 'The card with the specified ID does not exist.' });
+		}
+	} catch (error) {
+		res.status(500).json({
+			message: `The card's information could not be modified: ${error.message}.`
+		});
+	}
+});
+
 module.exports = router;
