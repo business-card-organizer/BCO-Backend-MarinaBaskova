@@ -51,18 +51,33 @@ router.post('/', async (req, res) => {
 				userEvent = null;
 			}
 			try {
-				const newCard = await db.create({
-					first_name: firstName,
-					last_name: lastName,
-					organization: organization,
-					job_title: jobTitle,
-					email: email,
-					phone: phone,
-					event_id: userEvent.id,
-					user_id: userID
-				});
-				if (newCard) {
-					res.status(201).json(newCard);
+				if (userEvent) {
+					const newCard = await db.create({
+						first_name: firstName,
+						last_name: lastName,
+						organization: organization,
+						job_title: jobTitle,
+						email: email,
+						phone: phone,
+						event_id: userEvent.id,
+						user_id: userID
+					});
+					if (newCard) {
+						res.status(201).json(newCard);
+					}
+				} else {
+					const newCard = await db.create({
+						first_name: firstName,
+						last_name: lastName,
+						organization: organization,
+						job_title: jobTitle,
+						email: email,
+						phone: phone,
+						user_id: userID
+					});
+					if (newCard) {
+						res.status(201).json(newCard);
+					}
 				}
 			} catch (error) {
 				res.status(500).json({ message: `Your card could not be posted ${error.message}.` });
@@ -115,7 +130,7 @@ router.put('/:id', async (req, res) => {
 						res.status(200).json(editedCard);
 					} else {
 						res.status(404).json({
-							message: 'The event with the specified ID does not exist.'
+							message: 'The card with the specified ID does not exist.'
 						});
 					}
 				} catch (error) {
