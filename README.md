@@ -51,7 +51,7 @@ This project is a RESTful API built using Node and Express. This project was bui
 
 **GET** `https://business-cards-organizer-ls.herokuapp.com/api/cards/:id` will return an object corresponding to the card at that ID.
 
-**DEL** `https://business-cards-organizer-ls.herokuapp.com/api/cards` will delete the card, and return status 204.
+**DEL** `https://business-cards-organizer-ls.herokuapp.com/api/cards/:id` will delete the card, and return status 204.
 
 **POST** `https://business-cards-organizer-ls.herokuapp.com/api/cards/qr` Qr code should include giver uinique qr_code. will find giver information from the qr code provided (scaned) in the req body and will create and add contact bussiness card to user's card collection. will return an object with contact bussiness card created.
 
