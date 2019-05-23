@@ -154,8 +154,7 @@ router.delete('/:id', async (req, res) => {
 
 router.post('/qr', async (req, res) => {
 	const userID = req.decodedToken.subject.toString();
-	console.log(req.body.payload);
-	const { qrCode } = req.payload;
+	const { qrCode } = req.body;
 	try {
 		let foundUser = await userDB.findByQR(qrCode);
 		console.log(foundUser);
