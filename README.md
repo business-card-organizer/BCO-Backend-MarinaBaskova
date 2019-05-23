@@ -67,7 +67,7 @@ This project is a RESTful API built using Node and Express. This project was bui
 
 **GET** `https://business-cards-organizer-ls.herokuapp.com/api/events/:id` will return an object corresponding to the event at that ID.
 
-**DEL** `https://business-cards-organizer-ls.herokuapp.com/api/events` will delete the event, and return status 204.
+**DEL** `https://business-cards-organizer-ls.herokuapp.com/api/events/:id` will delete the event, and return status 204.
 
 **POST** `https://business-cards-organizer-ls.herokuapp.com/api/events` will post a event, and return the created object. The eventName, city, are REQUIRED fields.
 
