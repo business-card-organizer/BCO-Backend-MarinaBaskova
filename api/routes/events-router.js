@@ -84,7 +84,7 @@ router.put('/:id', async (req, res) => {
 				});
 			}
 		} else {
-			res.status(401).json({
+			res.status(404).json({
 				message: `The event with the specified ID does not exist.`
 			});
 		}

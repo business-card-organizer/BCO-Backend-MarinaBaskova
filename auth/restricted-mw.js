@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const db = require('../api/routes/users-model.js');
-const secret = process.env.SECRET;
+const secret = process.env.SECRET || 'testing';
 
 module.exports = (req, res, next) => {
 	if (req.headers.authorization) {
@@ -10,16 +10,6 @@ module.exports = (req, res, next) => {
 			if (err) {
 				res.status(401).json({ message: 'Invalid Credentials' });
 			} else {
-				// db find user by id from decodeddtoken
-				// db
-				// 	.findByID(decodedToken.subject)
-				// 	.then((user) => {
-				// 		req.user = user;
-				// 		next();
-				// 	})
-				// 	.catch((err) => {
-				// 		res.status(500).json(err);
-				// 	});
 				req.decodedToken = decodedToken;
 				next();
 			}
