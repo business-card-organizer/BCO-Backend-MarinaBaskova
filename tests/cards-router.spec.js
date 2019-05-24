@@ -53,7 +53,7 @@ describe('server', () => {
 				expect(res.status).toBe(201);
 			});
 		});
-		it('sould respond with 200', () => {
+		it('should respond with 200', () => {
 			return request(server).get('/api/user').set('Authorization', globalToken).then((res) => {
 				expect(res.status).toBe(200);
 			});
@@ -124,22 +124,17 @@ describe('server', () => {
 				email: 'c@gmail.com',
 				phone: '323-456-456'
 			};
-
 			return request(server).post('/api/cards').set('Authorization', globalToken).send(card).then((res) => {
 				console.log(res.body.id);
 				expect(res.status).toBe(201);
 
-				return (
-					request(server)
-						.delete(`/api/cards/${res.body.id}`)
-						.set('Authorization', globalToken)
-						// .send(`${res.body.id}`, `${userId}`)
-						.then((res) => {
-							expect(res.status).toBe(204);
-						})
-				);
+				return request(server)
+					.delete(`/api/cards/${res.body.id}`)
+					.set('Authorization', globalToken)
+					.then((res) => {
+						expect(res.status).toBe(204);
+					});
 			});
-			// });
 		});
 	});
 });
