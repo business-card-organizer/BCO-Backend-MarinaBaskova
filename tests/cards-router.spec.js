@@ -115,6 +115,38 @@ describe('server', () => {
 				expect(res.status).toBe(401);
 			});
 		});
+
+		it('should return 200 and updated card', () => {
+			let card = {
+				firstName: 'Kiwi',
+				lastName: 'Apple',
+				organization: 'Cucumber',
+				jobTitle: 'ABC',
+				email: 'c@gmail.com',
+				phone: '323-456-456'
+			};
+			return request(server).post('/api/cards').set('Authorization', globalToken).send(card).then((res) => {
+				console.log(res.body.id);
+				expect(res.status).toBe(201);
+				card = {
+					firstName: 'Kiwi1',
+					lastName: 'Apple',
+					organization: 'Cucumber',
+					jobTitle: 'ABC',
+					email: 'c@gmail.com',
+					phone: '323-456-456'
+				};
+				return request(server)
+					.put(`/api/cards/${res.body.id}`)
+					.set('Authorization', globalToken)
+					.send(card)
+					.then((res) => {
+						expect(res.status).toBe(200);
+						expect(res.body.firstName).toBe(card.firstName);
+						console.log(res.body);
+					});
+			});
+		});
 		it('should return 204 on deleted', () => {
 			let card = {
 				firstName: 'Pear',
