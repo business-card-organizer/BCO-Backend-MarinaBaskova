@@ -2,7 +2,7 @@ const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const db = require('../api/routes/users-model.js');
-const secret = process.env.SECRET;
+const secret = process.env.SECRET || 'testing';
 
 // >>>>> /api/auth
 

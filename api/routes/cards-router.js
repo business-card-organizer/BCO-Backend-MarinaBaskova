@@ -7,7 +7,6 @@ const userDB = require('./users-model.js');
 
 router.get('/', async (req, res) => {
 	const userID = req.decodedToken.subject.toString();
-
 	try {
 		const cards = await db.findAll(userID);
 		if (cards.length > 0) {
@@ -78,53 +77,35 @@ router.put('/:id', async (req, res) => {
 		} else {
 			userEvent = null;
 		}
-		try {
-			const card = await db.findById(id, userID);
-			if (card) {
-				const cardUpdate = { user_id: userID };
-				if (firstName) {
-					cardUpdate.first_name = firstName;
-				}
-				if (lastName) {
-					cardUpdate.last_name = lastName;
-				}
-				if (organization) {
-					cardUpdate.organization = organization;
-				}
-				if (jobTitle) {
-					cardUpdate.job_title = jobTitle;
-				}
-				if (email) {
-					cardUpdate.email = email;
-				}
-				if (phone) {
-					cardUpdate.phone = phone;
-				}
-				if (eventId) {
-					cardUpdate.event_id = userEvent.id; ////<<<<
-				}
-				try {
-					const editedCard = await db.update(cardUpdate, id);
-					if (editedCard) {
-						res.status(200).json(editedCard);
-					} else {
-						res.status(404).json({
-							message: 'The card with the specified ID does not exist.'
-						});
-					}
-				} catch (error) {
-					res.status(500).json({
-						message: `The card's information could not be modified: ${error.message}.`
-					});
-				}
-			} else {
-				res.status(404).json({
-					message: `The card with the specified ID does not exist.`
-				});
+		const card = await db.findById(id, userID);
+		if (card) {
+			const cardUpdate = { user_id: userID };
+			if (firstName) {
+				cardUpdate.first_name = firstName;
 			}
-		} catch (error) {
-			res.status(500).json({
-				message: `Card updated failed ${error.message}.`
+			if (lastName) {
+				cardUpdate.last_name = lastName;
+			}
+			if (organization) {
+				cardUpdate.organization = organization;
+			}
+			if (jobTitle) {
+				cardUpdate.job_title = jobTitle;
+			}
+			if (email) {
+				cardUpdate.email = email;
+			}
+			if (phone) {
+				cardUpdate.phone = phone;
+			}
+			if (eventId) {
+				cardUpdate.event_id = userEvent.id;
+			}
+			const editedCard = await db.update(cardUpdate, id);
+			res.status(200).json(editedCard);
+		} else {
+			res.status(404).json({
+				message: `The card with the specified ID does not exist.`
 			});
 		}
 	} catch (error) {
